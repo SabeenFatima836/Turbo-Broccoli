@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stories with Morals</title>
+  <style>
+    :root{
+      --page-cream: #f6efe6;      /* page background (light beige) */
+      --card-cream: #fff8f2;      /* story card background (very light cream) */
+      --skin-header: #f2d8c2;     /* skin color for top header area */
+      --dark-beige: #5b4630;      /* dark-beige text color used everywhere */
+      --accent-beige: #b89a78;    /* accent for buttons and subtle elements */
+      --card-border: rgba(91,70,48,0.06);
+      --shadow: rgba(91,70,48,0.04);
+    }
+
+    /* Base */
+    html,body{
+      height:100%;
+      margin:0;
+      padding:0;
+      background:var(--page-cream);
+      color:var(--dark-beige);
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    /* Header & Nav */
+    header{
+      background:var(--skin-header);
+      padding:28px 16px;
+      text-align:center;
+      border-bottom: 1px solid rgba(91,70,48,0.06);
+    }
+    header h1{
+      margin:0;
+      font-size:2rem;
+      color:var(--dark-beige); /* dark-beige heading color */
+      letter-spacing:0.6px;
+      font-weight:800;
+      font-style:normal; /* heading remains non-italic */
+    }
+    header p{
+      margin:6px 0 0;
+      color:var(--dark-beige);
+      font-style:italic;
+      font-weight:600;
+    }
+
+    nav{
+      display:flex;
+      justify-content:center;
+      gap:18px;
+      background:transparent;
+      padding:12px 8px;
+      border-bottom: 1px solid rgba(91,70,48,0.03);
+    }
+    nav a{
+      color:var(--dark-beige);
+      text-decoration:none;
+      font-weight:600;
+      padding:6px 10px;
+      border-radius:6px;
+      font-style:italic; /* nav links italic & slightly bold */
+    }
+    nav a:hover{
+      background:rgba(184,154,120,0.08);
+    }
+
+    /* Layout container */
+    .container{
+      max-width:1100px;
+      margin:28px auto;
+      padding:0 18px;
+    }
+
+    h2{
+      color:var(--dark-beige);
+      margin:0 0 12px 0;
+      font-size:1.4rem;
+      font-style:italic;
+      font-weight:600;
+    }
+
+    /* Stories grid */
+    .stories-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap:18px;
+      margin-top:12px;
+    }
+
+    .story-card{
+      background:var(--card-cream);
+      border:1px solid var(--card-border);
+      border-radius:10px;
+      padding:16px;
+      box-shadow: 0 6px 18px var(--shadow);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .story-card:hover{
+      transform:translateY(-4px);
+      box-shadow: 0 12px 30px rgba(91,70,48,0.08);
+    }
+
+    .story-card h3{
+      margin:0 0 8px 0;
+      color:var(--dark-beige);
+      font-size:1.05rem;
+      font-weight:800;
+      font-style:italic; /* headings inside cards italic & bold */
+    }
+
+    /* Story paragraph: italic and slightly bold, serif for a storytelling feel */
+    .story-card p.story {
+      margin:0 0 10px 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-weight:600; /* slightly bold italic */
+      color:var(--dark-beige);
+    }
+
+    .story-card p.moral{
+      margin:0;
+      font-weight:700;
+      color:var(--dark-beige);
+      font-size:0.95rem;
+      font-style:italic;
+    }
+
+    /* Apply italic + slightly bold to most textual elements except header h1 */
+    p, li, label, footer, .container > p, .container > ul, .container > form, .container h2, .story-card h3 {
+      color:var(--dark-beige);
+      font-style:italic;
+      font-weight:600;
+    }
+
+    /* Form fields styled to match (input text will appear italic & slightly bold) */
+    input[type="text"], input[type="email"], textarea{
+      width:100%;
+      padding:8px 10px;
+      border-radius:6px;
+      border:1px solid rgba(91,70,48,0.08);
+      background: #fff;
+      box-sizing:border-box;
+      font-size:0.95rem;
+      color:var(--dark-beige);
+      font-style:italic;
+      font-weight:600;
+    }
+
+    button{
+      background:var(--accent-beige);
+      color:var(--dark-beige);
+      border:none;
+      padding:10px 14px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+      font-style:italic;
+    }
+    button:hover{ opacity:0.95; }
+
+    ul{ color:var(--dark-beige); padding-left:18px; }
+    li{ margin:6px 0; }
+
+    footer{
+      margin-top:36px;
+      padding:18px 8px;
+      text-align:center;
+      color:var(--dark-beige);
+      font-size:0.95rem;
+      border-top:1px solid rgba(91,70,48,0.04);
+      font-style:italic;
+      font-weight:600;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width:420px){
+      header h1{ font-size:1.5rem; }
+      nav{ gap:10px; padding:8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Stories with Morals</h1>
+    <p><em>Inspired by Islamic teachings and timeless values</em></p>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#stories">Stories</a>
+    <a href="#morals">Moral Lessons</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main>
+    <section class="container" id="home">
+      <h2>Welcome</h2>
+      <p style="font-family:Georgia,serif;">
+        Storytelling is a gentle way to teach the heart. These short tales carry simple morals rooted in Islamic values and universal goodness.
+      </p>
+    </section>
+
+    <section class="container" id="stories">
+      <h2>Stories</h2>
+
+      <div class="stories-grid">
+        <article class="story-card">
+          <h3>The Honest Merchant</h3>
+          <p class="story">A merchant refused to cheat his customers even when tempted by profit. He kept fair measures and honest words every day. People trusted him and returned often. His honest trade brought lasting blessings.</p>
+          <p class="moral"><strong>Moral:</strong> Honesty builds trust and blessing.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>Helping the Poor</h3>
+          <p class="story">A man gave food to a hungry stranger without expecting anything in return. He felt warmth in his chest after sharing. Neighbors noticed and began to help too. The small act grew into a caring community.</p>
+          <p class="moral"><strong>Moral:</strong> Charity spreads compassion.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Patient Farmer</h3>
+          <p class="story">A farmer planted seeds and waited patiently for rain despite mockery. He trusted Allah's timing and kept working with hope. When the season came, his fields were green and full. His patience turned into provision.</p>
+          <p class="moral"><strong>Moral:</strong> Patience yields reward.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Kind Neighbor</h3>
+          <p class="story">A woman always greeted her neighbor with a smile and small favors. When he fell ill, she cared for him without complaint. Her kindness softened his heart and healed loneliness. Their friendship became a blessing for both.</p>
+          <p class="moral"><strong>Moral:</strong> Kindness creates bonds.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Forgiving Brother</h3>
+          <p class="story">Two brothers quarreled and stopped speaking for years. One decided to forgive and brought a simple gift to reconcile. The other wept and embraced him with relief. Forgiveness restored peace to their home.</p>
+          <p class="moral"><strong>Moral:</strong> Forgiveness heals relationships.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Generous Child</h3>
+          <p class="story">A child shared his small toy with a lonely classmate at recess. The classmate smiled and joined their games with joy. The teacher praised the child's generous heart. Soon others followed his gentle example.</p>
+          <p class="moral"><strong>Moral:</strong> Generosity inspires others.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Truthful Student</h3>
+          <p class="story">A student admitted he had made a mistake on a test instead of hiding it. His teacher respected his honesty and guided him to improve. His classmates admired his courage to be truthful. He learned that truth brings dignity.</p>
+          <p class="moral"><strong>Moral:</strong> Truth preserves dignity.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Respectful Son</h3>
+          <p class="story">A son listened patiently to his parents and helped them without complaint. He honored their advice and cared for them in old age. His respect warmed their hearts and earned their prayers. His life was blessed by their dua.</p>
+          <p class="moral"><strong>Moral:</strong> Respect for parents brings blessings.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Helpful Traveler</h3>
+          <p class="story">A traveler saw an old man struggling with heavy bags and offered help. He carried the load until the man reached his home safely. The old man prayed for him with sincere gratitude. The traveler found his journey eased in return.</p>
+          <p class="moral"><strong>Moral:</strong> Helping others brings ease.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Grateful Friend</h3>
+          <p class="story">A friend thanked Allah for small daily blessings and expressed gratitude to others. His thankful heart made him cheerful and content. People enjoyed his company and learned to notice blessings too. Gratitude filled his life with peace.</p>
+          <p class="moral"><strong>Moral:</strong> Gratitude increases contentment.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Humble Scholar</h3>
+          <p class="story">A learned man shared knowledge without pride and listened to others humbly. Students felt safe to ask questions and learn. His humility spread respect and curiosity. Knowledge grew in hearts, not arrogance.</p>
+          <p class="moral"><strong>Moral:</strong> Humility invites true learning.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Brave Girl</h3>
+          <p class="story">A girl stood up for a bullied classmate despite fear of teasing. Her courage stopped the cruelty and others joined to protect the child. The bully apologized and changed. Courage defended the weak and taught respect.</p>
+          <p class="moral"><strong>Moral:</strong> Courage protects the vulnerable.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Wise Listener</h3>
+          <p class="story">A neighbor listened carefully when someone shared a worry without interrupting. The listener's calm presence eased the burden and offered gentle advice. The worried person felt understood and hopeful. Listening became a quiet gift.</p>
+          <p class="moral"><strong>Moral:</strong> Listening heals hearts.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Honest Worker</h3>
+          <p class="story">A worker returned extra change found in a shop's till instead of keeping it. The owner rewarded his honesty with trust and a steady job. His integrity became known in the town. Honesty opened doors for him.</p>
+          <p class="moral"><strong>Moral:</strong> Integrity brings lasting reward.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Patient Mother</h3>
+          <p class="story">A mother taught her child with gentle repetition and endless patience. The child learned slowly but surely and grew confident. Her calm steadiness shaped character more than quick scolding. Patience nurtured growth.</p>
+          <p class="moral"><strong>Moral:</strong> Patience nurtures growth.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Fair Judge</h3>
+          <p class="story">A judge listened to both sides before deciding and did not favor the rich. People trusted his rulings and came for justice. His fairness kept the community peaceful and safe. Justice rooted in fairness earned respect.</p>
+          <p class="moral"><strong>Moral:</strong> Fairness sustains community trust.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Sincere Dua</h3>
+          <p class="story">A woman prayed sincerely for a lost neighbor and then helped search. Their combined effort found the neighbor's child safe. Her sincere dua moved her to action and brought relief. Faith and effort worked together.</p>
+          <p class="moral"><strong>Moral:</strong> Sincere prayer inspires action.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Modest Artist</h3>
+          <p class="story">An artist praised others' work and kept modest about his own talent. People admired his humility and supported his exhibitions. His modesty made his art more beloved than boastful praise would. Modesty enhanced his gift.</p>
+          <p class="moral"><strong>Moral:</strong> Modesty increases respect.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Reliable Friend</h3>
+          <p class="story">A friend kept promises and arrived when needed, even at inconvenience. Others trusted him with secrets and tasks. His reliability became a quiet strength in the group. Trust grew where promises were kept.</p>
+          <p class="moral"><strong>Moral:</strong> Reliability builds deep trust.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Thoughtful Gift</h3>
+          <p class="story">A young man gave a simple, meaningful gift to an elderly teacher. The teacher's eyes lit up and memories returned. The small gesture honored years of care and brought joy. Thoughtful giving touched the heart.</p>
+          <p class="moral"><strong>Moral:</strong> Thoughtfulness honors others.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Clean Heart</h3>
+          <p class="story">A person chose to forgive slander and did not spread rumors in return. His restraint stopped gossip and restored dignity. Others followed his example and the community grew kinder. A clean heart prevented harm.</p>
+          <p class="moral"><strong>Moral:</strong> Restraint prevents harm.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Diligent Student</h3>
+          <p class="story">A student studied a little each day instead of cramming at the last minute. Over time his knowledge deepened and exams became easier. His steady effort brought confidence and success. Consistency beat panic.</p>
+          <p class="moral"><strong>Moral:</strong> Consistent effort wins.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Caring Teacher</h3>
+          <p class="story">A teacher noticed a quiet child and offered extra encouragement after class. The child began to speak up and participate. The teacher's care unlocked hidden potential. Attention changed a shy life.</p>
+          <p class="moral"><strong>Moral:</strong> Attention reveals potential.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Fair Trade</h3>
+          <p class="story">A shopkeeper set fair prices and refused to exploit shortages. Customers returned and recommended his shop widely. His steady fairness outlasted quick profit from greed. Fair trade built a loyal clientele.</p>
+          <p class="moral"><strong>Moral:</strong> Fairness wins long-term trust.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Quiet Volunteer</h3>
+          <p class="story">A volunteer cleaned the mosque courtyard each morning without seeking praise. Worshippers noticed the tidy space and felt peace. His quiet service made the place welcoming for all. Service without show blessed the community.</p>
+          <p class="moral"><strong>Moral:</strong> Quiet service blesses many.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Thoughtful Leader</h3>
+          <p class="story">A leader consulted the community before making a decision and listened to concerns. The chosen plan served many and avoided harm. People felt included and supported the outcome. Inclusive leadership strengthened unity.</p>
+          <p class="moral"><strong>Moral:</strong> Inclusive leadership builds unity.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Patient Healer</h3>
+          <p class="story">A healer treated patients with calm care and explained each step gently. Patients trusted the process and recovered with hope. His patience comforted families and eased fear. Gentle care aided healing.</p>
+          <p class="moral"><strong>Moral:</strong> Gentle care supports recovery.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Wise Saver</h3>
+          <p class="story">A family saved a little each month for future needs instead of spending all at once. When hardship came, they managed without panic. Their foresight kept them secure and grateful. Small savings brought peace of mind.</p>
+          <p class="moral"><strong>Moral:</strong> Prudence prepares for tomorrow.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Encouraging Coach</h3>
+          <p class="story">A coach praised effort more than only wins and taught players to improve kindly. The team grew confident and played with joy. Their improvement came from encouragement, not fear. Positive guidance shaped champions.</p>
+          <p class="moral"><strong>Moral:</strong> Encouragement fosters growth.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Honest Farmer</h3>
+          <p class="story">A farmer measured grain fairly at market and refused to cheat customers. Word spread and buyers preferred his stall. His honest practice brought steady income and respect. Fairness in trade rewarded him.</p>
+          <p class="moral"><strong>Moral:</strong> Fair measures honor everyone.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Patient Builder</h3>
+          <p class="story">A builder took time to lay a strong foundation rather than rush. Years later the house stood firm through storms. Neighbors admired the careful work and learned to value quality. Patience created lasting strength.</p>
+          <p class="moral"><strong>Moral:</strong> Careful work endures.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Sharing Family</h3>
+          <p class="story">A family shared their harvest with neighbors during a lean season. The shared food kept many from hunger and created gratitude. Later, when they needed help, neighbors returned the kindness. Sharing built mutual support.</p>
+          <p class="moral"><strong>Moral:</strong> Sharing creates mutual care.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Calm Mediator</h3>
+          <p class="story">A mediator listened to both sides of a dispute calmly and suggested fair compromises. The parties accepted and peace returned. The mediator's calm prevented escalation and saved relationships. Calm wisdom solved conflict.</p>
+          <p class="moral"><strong>Moral:</strong> Calm mediation restores peace.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Respectful Visitor</h3>
+          <p class="story">A visitor removed shoes and spoke softly in an elder's home, showing respect. The elder felt honored and shared stories freely. Respect opened doors to wisdom and warmth. Courtesy deepened connection.</p>
+          <p class="moral"><strong>Moral:</strong> Courtesy opens hearts.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Honest Promise</h3>
+          <p class="story">A young woman promised to help a neighbor and kept her word despite difficulty. The neighbor's trust grew and the community noticed her reliability. Her kept promise became a small pillar of trust. Promises kept shape character.</p>
+          <p class="moral"><strong>Moral:</strong> Keeping promises builds character.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Thoughtful Listener</h3>
+          <p class="story">A youth listened to an elder's story and asked kind questions that showed care. The elder felt valued and shared wisdom freely. The youth learned lessons that books could not teach. Respectful listening bridged generations.</p>
+          <p class="moral"><strong>Moral:</strong> Respectful listening connects generations.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Gentle Reminder</h3>
+          <p class="story">A friend gently reminded another of a missed promise without blame. The friend accepted the reminder and made amends. Their relationship grew stronger through honest, kind correction. Gentle reminders preserve dignity.</p>
+          <p class="moral"><strong>Moral:</strong> Kind correction preserves dignity.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Patient Gardener</h3>
+          <p class="story">A gardener tended seedlings daily with care and patience, never rushing growth. Over time the garden bloomed in beauty and abundance. Neighbors admired the steady attention. Patient care produced lasting beauty.</p>
+          <p class="moral"><strong>Moral:</strong> Steady care yields beauty.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Fair Teacher</h3>
+          <p class="story">A teacher graded work fairly and explained mistakes kindly to every student. Each child felt seen and motivated to improve. The classroom became a place of trust and learning. Fairness encouraged effort.</p>
+          <p class="moral"><strong>Moral:</strong> Fair guidance encourages growth.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Humble Winner</h3>
+          <p class="story">After winning a competition, a young man thanked his teammates and praised their help. His humility made the victory sweeter and inspired teamwork. Others celebrated together rather than envying him. Humble success unites people.</p>
+          <p class="moral"><strong>Moral:</strong> Humility multiplies joy.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Caring Neighbor</h3>
+          <p class="story">A neighbor checked on an elderly woman during a storm and brought warm soup. She felt safe and comforted by the visit. The small care eased fear and built trust. Simple concern became a lifeline.</p>
+          <p class="moral"><strong>Moral:</strong> Small care can be a lifeline.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Honest Apprentice</h3>
+          <p class="story">An apprentice admitted a mistake to his master and asked how to fix it. The master taught him patiently and the apprentice improved quickly. His honesty earned respect and better skill. Owning mistakes accelerates learning.</p>
+          <p class="moral"><strong>Moral:</strong> Owning mistakes speeds growth.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Generous Farmer</h3>
+          <p class="story">A farmer shared seeds with neighbors before planting season so all could sow. The shared harvest fed many families and strengthened bonds. Generosity multiplied the harvest of goodwill. Shared resources created shared prosperity.</p>
+          <p class="moral"><strong>Moral:</strong> Sharing resources grows community.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Calm Sailor</h3>
+          <p class="story">A sailor stayed calm when a storm hit and guided the crew with steady commands. Their calm response saved the ship and lives. The crew learned to trust steady leadership in crisis. Calmness steered them to safety.</p>
+          <p class="moral"><strong>Moral:</strong> Calm leadership saves lives.</p>
+        </article>
+
+        <article class="story-card">
+          <h3>The Thoughtful Apology</h3>
+          <p class="story">After hurting a friend, a person offered a sincere apology and made amends. The friend forgave and their bond grew deeper. The apology healed more than words; it restored trust. Sincere remorse rebuilds relationships.</p>
+          <p class="moral"><strong>Moral:</strong> Sincere apology restores trust.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="container" id="morals">
+      <h2>Moral Lessons</h2>
+      <ul>
+        <li>Honesty – speak truthfully and fairly.</li>
+        <li>Charity – give to those in need with a sincere heart.</li>
+        <li>Patience – trust Allah's timing and keep working.</li>
+        <li>Kindness – small acts change lives.</li>
+        <li>Forgiveness – choose mercy to restore peace.</li>
+        <li>Generosity – share what you have, however small.</li>
+        <li>Respect – honor parents and elders.</li>
+        <li>Helpfulness – assist others without expecting reward.</li>
+        <li>Gratitude – notice and thank for blessings.</li>
+        <li>Truthfulness – be honest even when it is hard.</li>
+        <li>Humility – stay modest in success.</li>
+        <li>Courage – stand for what is right.</li>
+        <li>Listening – give others your attention.</li>
+        <li>Reliability – keep your promises.</li>
+        <li>Thoughtfulness – give meaningful gifts.</li>
+        <li>Restraint – avoid spreading harm.</li>
+        <li>Consistency – small steps matter.</li>
+        <li>Care – notice those who need help.</li>
+        <li>Fairness – treat everyone equally.</li>
+        <li>Service – help without seeking praise.</li>
+        <li>Inclusivity – include others in decisions.</li>
+        <li>Gentleness – heal with kindness.</li>
+        <li>Prudence – prepare for the future.</li>
+        <li>Encouragement – praise effort, not just results.</li>
+        <li>Quality – do work with care.</li>
+        <li>Sharing – build mutual support.</li>
+        <li>Mediation – resolve conflict calmly.</li>
+        <li>Courtesy – small manners open hearts.</li>
+        <li>Accountability – own mistakes and learn.</li>
+        <li>Unity – humble winners unite people.</li>
+      </ul>
+    </section>
+
+    <section class="container" id="about">
+      <h2>About</h2>
+      <p style="font-family:Georgia,serif;">
+        This site shares short, simple stories that teach good character and Islamic morals. Each tale is meant to be easy to read and reflect upon.
+      </p>
+    </section>
+
+    <section class="container" id="contact">
+      <h2>Contact</h2>
+      <p>Have a story to share? Send it below and we may include it with credit.</p>
+      <form>
+        <label for="name">Name:</label>
+        <input id="name" type="text" name="name" />
+
+        <label for="email">Email:</label>
+        <input id="email" type="email" name="email" />
+
+        <label for="story">Your Story:</label>
+        <textarea id="story" name="story" rows="5"></textarea>
+
+        <div style="margin-top:12px;">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2026 Stories with Morals
+  </footer>
+</body>
+</html>
